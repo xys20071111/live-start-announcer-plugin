@@ -38,7 +38,7 @@ APIMsgHandler.on('AUTHED', () => {
     ws.send(JSON.stringify({ cmd: "ROOMID", data: "" }));
 });
 APIMsgHandler.on("LIVE", () => {
-    (0, pushNotification_1.default)("bilibiliLiveAnnouncer.xys_main", config.api_token, {
+    (0, pushNotification_1.default)(config.push_app, config.api_token, {
         summary: encodeURIComponent("直播开始啦"),
         body: encodeURIComponent(`直播间 ${roomId} 开始直播啦`),
         persist: true,
@@ -46,7 +46,7 @@ APIMsgHandler.on("LIVE", () => {
     }, true);
 });
 APIMsgHandler.on("PREPARING", () => {
-    (0, pushNotification_1.default)("bilibiliLiveAnnouncer.xys_main", config.api_token, {
+    (0, pushNotification_1.default)(config.push_app, config.api_token, {
         summary: encodeURIComponent("直播结束了"),
         body: encodeURIComponent(`直播间 ${roomId} 结束直播了`),
         persist: true,
@@ -62,4 +62,4 @@ ws.on('message', (rawData) => {
         console.log(e);
     }
 });
-ws.send(JSON.stringify({ cmd: 'AUTH', data: config.api_token }));
+ws.on('open', () => ws.send(JSON.stringify({ cmd: 'AUTH', data: config.api_token })));

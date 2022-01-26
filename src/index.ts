@@ -51,4 +51,4 @@ ws.on('message', (rawData: string) => {
 	}
 });
 
-ws.send(JSON.stringify({cmd: 'AUTH', data: config.api_token}));
+ws.on('open', () => ws.send(JSON.stringify({cmd: 'AUTH', data: config.api_token})))
