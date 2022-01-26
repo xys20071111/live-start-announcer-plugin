@@ -1,0 +1,18 @@
+{
+  "name": "live-start-announcer-plugin",
+  "version": "0.1.0",
+  "description": "B站开播提醒插件，负责向运行 Ubuntu Touch 的手机推送通知",
+  "main": "dist/index.js",
+  "repository": "https://github.com/xys20071111/live-start-announcer-plugin.git",
+  "author": "xys20071111",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^17.0.12",
+    "@types/ws": "^8.2.2",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "ws": "^8.4.2"
+  }
+}
