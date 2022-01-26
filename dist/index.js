@@ -32,13 +32,18 @@ let roomId = 0;
 const ws = new ws_1.WebSocket(`ws://127.0.0.1:${config.api_port}/`);
 const APIMsgHandler = new events_1.EventEmitter();
 APIMsgHandler.on('ROOMID', (newRoomId) => {
+    console.log(`插件工作在${newRoomId}`);
     roomId = newRoomId;
 });
-APIMsgHandler.on('AUTHED', () => {
-    ws.send(JSON.stringify({ cmd: "ROOMID", data: "" }));
+APIMsgHandler.on('AUTH', (data) => {
+    if (data === 'AUTHED') {
+        console.log('已连接到websocket API');
+        ws.send(JSON.stringify({ cmd: "ROOMID", data: "" }));
+    }
 });
 APIMsgHandler.on("LIVE", () => {
-    (0, pushNotification_1.default)(config.push_app, config.api_token, {
+    console.log('推送直播开始通知');
+    (0, pushNotification_1.default)(config.push_app, config.push_token, {
         summary: encodeURIComponent("直播开始啦"),
         body: encodeURIComponent(`直播间 ${roomId} 开始直播啦`),
         persist: true,
@@ -46,7 +51,8 @@ APIMsgHandler.on("LIVE", () => {
     }, true);
 });
 APIMsgHandler.on("PREPARING", () => {
-    (0, pushNotification_1.default)(config.push_app, config.api_token, {
+    console.log('推送直播结束通知');
+    (0, pushNotification_1.default)(config.push_app, config.push_token, {
         summary: encodeURIComponent("直播结束了"),
         body: encodeURIComponent(`直播间 ${roomId} 结束直播了`),
         persist: true,
@@ -56,6 +62,7 @@ APIMsgHandler.on("PREPARING", () => {
 ws.on('message', (rawData) => {
     try {
         const msg = JSON.parse(rawData);
+        console.log(msg);
         APIMsgHandler.emit(msg.cmd, msg.data);
     }
     catch (e) {

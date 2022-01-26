@@ -47,6 +47,12 @@ function pushNotification(appid, token, card, vibrate) {
         },
         method: 'POST'
     });
+    req.on('response', res => {
+        res.setEncoding('utf8');
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => console.log(data));
+    });
     req.write(notificationJson);
     req.end();
 }

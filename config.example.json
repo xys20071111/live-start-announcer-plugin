@@ -1,0 +1,6 @@
+{
+  "push_app": "bla.xys_main",
+  "api_port": 7788,
+  "push_token": "你的push token",
+  "api_token": "你的api token"
+}
