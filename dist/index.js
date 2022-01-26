@@ -62,7 +62,6 @@ APIMsgHandler.on("PREPARING", () => {
 ws.on('message', (rawData) => {
     try {
         const msg = JSON.parse(rawData);
-        console.log(msg);
         APIMsgHandler.emit(msg.cmd, msg.data);
     }
     catch (e) {
