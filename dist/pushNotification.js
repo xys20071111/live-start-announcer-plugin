@@ -30,7 +30,8 @@ function pushNotification(appid, token, card, vibrate) {
         data: {
             notification: {
                 card,
-                vibrate: false,
+                vibrate: true,
+                sound: true
             }
         }
     };
