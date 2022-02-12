@@ -11,7 +11,8 @@ export default function pushNotification(appid: string, token: string, card: Car
     data: {
       notification: {
         card,
-        vibrate: false,
+        vibrate: true,
+        sound: true
       }
     }
   }
