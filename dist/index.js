@@ -43,21 +43,31 @@ APIMsgHandler.on('AUTH', (data) => {
 });
 APIMsgHandler.on("LIVE", () => {
     console.log('推送直播开始通知');
-    (0, pushNotification_1.default)(config.push_app, config.push_token, {
-        summary: encodeURIComponent("直播开始啦"),
-        body: encodeURIComponent(`直播间 ${roomId} 开始直播啦`),
-        persist: true,
-        popup: true
-    }, true);
+    try {
+        (0, pushNotification_1.default)(config.push_app, config.push_token, {
+            summary: encodeURIComponent("直播开始啦"),
+            body: encodeURIComponent(`直播间 ${roomId} 开始直播啦`),
+            persist: true,
+            popup: true
+        }, true);
+    }
+    catch (e) {
+        console.log('推送失败，原因： ' + e);
+    }
 });
 APIMsgHandler.on("PREPARING", () => {
     console.log('推送直播结束通知');
-    (0, pushNotification_1.default)(config.push_app, config.push_token, {
-        summary: encodeURIComponent("直播结束了"),
-        body: encodeURIComponent(`直播间 ${roomId} 结束直播了`),
-        persist: true,
-        popup: true
-    }, true);
+    try {
+        (0, pushNotification_1.default)(config.push_app, config.push_token, {
+            summary: encodeURIComponent("直播结束了"),
+            body: encodeURIComponent(`直播间 ${roomId} 结束直播了`),
+            persist: true,
+            popup: true
+        }, true);
+    }
+    catch (e) {
+        console.log('推送失败，原因： ' + e);
+    }
 });
 ws.on('message', (rawData) => {
     try {
