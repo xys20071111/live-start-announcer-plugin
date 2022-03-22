@@ -23,11 +23,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = require("ws");
-const path_1 = __importDefault(require("path"));
 const events_1 = require("events");
 const fs = __importStar(require("fs"));
 const pushNotification_1 = __importDefault(require("./pushNotification"));
-const config = JSON.parse(fs.readFileSync(path_1.default.join(__dirname, '../config.json'), { encoding: 'utf-8' }));
+const config = JSON.parse(fs.readFileSync(process.argv[2], { encoding: 'utf-8' }));
 let roomId = 0;
 const ws = new ws_1.WebSocket(`ws://127.0.0.1:${config.api_port}/`);
 const APIMsgHandler = new events_1.EventEmitter();

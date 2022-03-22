@@ -10,7 +10,7 @@ interface Message {
 	data: any
 }
 
-const config: IConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json'), { encoding: 'utf-8' }));
+const config: IConfig = JSON.parse(fs.readFileSync(process.argv[2], { encoding: 'utf-8' }));
 let roomId = 0;
 
 const ws = new WebSocket(`ws://127.0.0.1:${config.api_port}/`)
