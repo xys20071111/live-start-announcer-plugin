@@ -1,5 +1,4 @@
 import { WebSocket } from "ws";
-import path from "path";
 import { EventEmitter } from "events";
 import * as fs from 'fs'
 import IConfig from "./IConfig";
