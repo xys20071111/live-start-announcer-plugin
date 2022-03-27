@@ -50,10 +50,14 @@ function pushNotification(appid, token, card, vibrate) {
             method: 'POST'
         });
         req.on('response', res => {
-            res.setEncoding('utf8');
-            let data = '';
-            res.on('end', () => console.log('[开播通知插件] 推送成功'));
+            try {
+                res.setEncoding('utf8');
+                let data = '';
+                res.on('end', () => console.log('[开播通知插件] 推送成功'));
+            }
+            catch (e) { }
         });
+        req.on('error', () => console.log('[开播通知插件] 推送失败'));
         req.write(notificationJson);
         req.end();
     }
